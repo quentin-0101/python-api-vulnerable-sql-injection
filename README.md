@@ -1,4 +1,6 @@
-setup db
+setup project : 
+
+execute this on DB
 ```sql
 -- Table des utilisateurs
 CREATE TABLE IF NOT EXISTS users (
@@ -18,4 +20,15 @@ INSERT INTO users (username, email, bio) VALUES
 ON CONFLICT DO NOTHING;
 
 
-```# python-api-vulnerable-sql-injection
+```
+
+in bash
+```
+docker compose up -d
+```
+
+
+view logs
+```
+docker logs api -f
+```
