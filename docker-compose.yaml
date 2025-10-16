@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+
+  db:
+    restart: unless-stopped
+    image: postgres:17.6-alpine3.21
+    container_name: database
+    environment:
+      POSTGRES_DB: main
+      POSTGRES_PASSWORD: main
+      POSTGRES_USER: main
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - microservices_net
+
+  api:
+    build: .
+    container_name: fastapilogin
+    volumes:
+      - .:/app
+    networks:
+      - microservices_net
+    ports:
+      - "127.0.0.1:5000:5000"
+
+networks:
+  microservices_net:
+    external: true
+
+volumes:
+  pgdata:
+    driver: local
